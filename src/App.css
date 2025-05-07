@@ -4,16 +4,84 @@
   box-sizing: border-box;
 }
 body {
+  padding-block: 4rem;
+  transition: all 0.3s ease-in;
+  -webkit-transition: all 0.3s ease-in;
+  -moz-transition: all 0.3s ease-in;
+  -ms-transition: all 0.3s ease-in;
+  -o-transition: all 0.3s ease-in;
+}
+body.light {
+  font-family: "Vollkorn", serif;
   background-image: url("./assets//images/testimonial-bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 5rem 2rem;
   min-height: 100vh;
-  
+}
+body.dark {
+  background-color: #1f1e1e;
+  color: #fff;
+  .tasks {
+    background-color: #353434 !important;
+    box-shadow: 0 5px 7px #1b1b1b !important;
+    h1,
+    label {
+      color: white;
+    }
+    .mode {
+      .btn-mode {
+        background-color: #414040;
+      }
+     
+    }
+    .add-task {
+      background-color: #198754;
+    }
+    .list-of-tasks {
+      .task {
+        background-color: #414040;
+        box-shadow: 0 2px 7px #4d4e4d;
+      }
+    }
+  }
+}
+label {
+  color: #0f3254;
 }
 
-
+button {
+  outline: 0;
+  border: 0;
+}
 .tasks {
+  max-width: 80%;
+  h1 {
+    color: #0f3254;
+  }
+  .mode {
+    top: 20px;
+    left: 30px;
+    .btn-mode {
+      background-color: #0f3254;
+      transition: all 0.3s;
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      -ms-transition: all 0.3s;
+      -o-transition: all 0.3s;
+}
+    
+  }
+  .add-task {
+    background-color: #0f3254;
+  }
+  .list-of-tasks {
+    .task {
+      background-color: #0f3254;
+      .due-date {
+        color: #b1aeae;
+      }
+    }
+  }
   .filtered-Tasks > button {
     transition: all 0.3s ease-in-out;
     -webkit-transition: all 0.3s ease-in-out;
@@ -27,9 +95,21 @@ body {
       -moz-transform: scale(1.06);
       -ms-transform: scale(1.06);
       -o-transform: scale(1.06);
-}
-}
+    }
+  }
 }
 
-
-
+@media (max-width: 768px) {
+  .tasks {
+    max-width: 95%;
+    padding: 1rem;
+    .task-info {
+      h2 {
+        font-size: 1.3rem;
+      }
+      p {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
