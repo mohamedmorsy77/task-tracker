@@ -34,7 +34,7 @@ function App() {
 
   // Delete Task
   const deleteTask = useCallback(
-    async (index) => {
+    async (id) => {
       const result = await Swal.fire({
         title: "Confirm Deletion",
         text: "Are you sure you want to delete?",
@@ -45,8 +45,9 @@ function App() {
         confirmButtonText: "Yes, delete it!",
       });
       if (result.isConfirmed) {
-        const tasksAfterDeletion = [...tasks];
-        tasksAfterDeletion.splice(index, 1);
+        const tasksAfterDeletion = [...tasks].filter((task) => {
+          return task.id !== id;
+        });
         localStorage.setItem("tasks", JSON.stringify(tasksAfterDeletion));
         setTasks(tasksAfterDeletion);
         toast.success("Task deleted Successfully");
@@ -57,9 +58,9 @@ function App() {
 
   // Complete Tasks
   const completeTask = useCallback(
-    (index) => {
-      const tasksAfterCompletion = tasks.map((item, i) => {
-        return i === index ? { ...item, isCompleted: true } : item;
+    (id) => {
+      const tasksAfterCompletion = tasks.map((task, i) => {
+        return task.id === id ? { ...task, isCompleted: true } : task;
       });
       setTasks(tasksAfterCompletion);
       localStorage.setItem("tasks", JSON.stringify(tasksAfterCompletion));
@@ -81,7 +82,6 @@ function App() {
       })
     );
   }, [status, tasks]);
-  
 
   useEffect(() => {
     const tasksStorage = localStorage.getItem("tasks");
@@ -154,13 +154,13 @@ function App() {
       </div>
       <div className="list-of-tasks">
         {filterTasks.length > 0 ? (
-          filterTasks.map(({ id, taskName, dueDate, isCompleted }, index) => (
+          filterTasks.map(({ id, taskName, dueDate, isCompleted }) => (
             <TaskItem
               key={id}
               taskName={taskName}
               dueDate={dueDate}
-              deleteTask={() => deleteTask(index)}
-              completeTask={() => completeTask(index)}
+              deleteTask={() => deleteTask(id)}
+              completeTask={() => completeTask(id)}
               isCompleted={isCompleted}
               status={status}
             />
